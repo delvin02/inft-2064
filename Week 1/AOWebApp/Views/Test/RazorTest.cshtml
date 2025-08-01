@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "RazorTest";
+
+    // two variables sum
+    var a = 5;
+    var b = 10;
+    var sum = a + b;
+
+    // array of strings
+    string[] names = { "A", "B", "C" };
+
+    // coordinate objects x, y
+    var coords = new[] {
+        new { x = 1, y = 1 },
+        new { x = 2, y = 3 },
+        new { x = 5, y = 8 }
+    };
+}
+
+<h1>TestController - RazorTest</h1>
+<h2>Sum of variables: @sum</h2>
+<h3>Names List</h3>
+
+<!-- print names -->
+<ul>
+    @foreach (var name in names)
+    {
+        <li>@name</li>
+    }
+</ul>
+
+<h3>Coordinates</h3>
+<!-- print coordinate values (x, y)-->
+<ul>
+    @foreach (var c in coords)
+    {
+        <li>(@c.x, @c.y)</li>
+    }
+</ul>
+
+<h3>Passing Parameters</h3>
+<p><a asp-controller="Test" asp-action="RazorTest" asp-route-id="99" asp-route-query="fromLink">Pass via Anchor Tag</a></p>
+
+<!-- submit form-->
+<form asp-controller="Test" asp-action="RazorTest" method="get">
+    <label>Enter Form Value:</label>
+    <input type="text" name="formValue" />
+    <button type="submit">Submit</button>
+</form>
+
+<hr />
+<p><strong>ID:</strong> @ViewBag.Id</p>
+<p><strong>Query String:</strong> @ViewBag.Query</p>
+<p><strong>Form Value:</strong> @ViewBag.FormValue</p>
