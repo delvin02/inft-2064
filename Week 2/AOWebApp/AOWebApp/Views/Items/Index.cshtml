@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AOWebApp.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Items" asp-action="Index" method="post" class="mb-3">
+    <input type="text"
+           class="form-control"
+           maxlength="100"
+           name="searchText"
+           placeholder="Enter item name..."
+           title="Search for an item by name"
+           value="@ViewBag.searchText"/>
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img src="@item.ItemImage" class="card-img-top" alt="Image of @item.ItemName">
+                <div class="card-body">
+                    <h5 class="card-title"> @item.ItemName</h5>
+                    <p class="card-text">@Html.DisplayFor(m => item.ItemDescription)</p>
+                    <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+
+     @*   @Html.DisplayFor(modelItem => item.ItemCost)
+        @Html.DisplayFor(modelItem => item.ItemImage)
+        @Html.DisplayFor(modelItem => item.Category.CategoryId)*@
+    }
+
+</div>
+

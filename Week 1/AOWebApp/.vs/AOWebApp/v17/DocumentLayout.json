@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{53FD7CDB-1ABC-4AF6-B278-98C4642848F7}|AOWebApp.csproj|c:\\users\\weeiw\\documents\\inft-2064\\week 1\\aowebapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{53FD7CDB-1ABC-4AF6-B278-98C4642848F7}|AOWebApp.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{53FD7CDB-1ABC-4AF6-B278-98C4642848F7}|AOWebApp.csproj|c:\\users\\weeiw\\documents\\inft-2064\\week 1\\aowebapp\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{53FD7CDB-1ABC-4AF6-B278-98C4642848F7}|AOWebApp.csproj|solutionrelative:controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -54,11 +58,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-02T08:58:40.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -70,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
@@ -82,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Test\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Test\\Index.cshtml",
@@ -94,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Test.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Home\\Test.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Test.cshtml",
@@ -106,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -118,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -130,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -142,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RazorTest.cshtml",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Views\\Test\\RazorTest.cshtml",
               "RelativeDocumentMoniker": "Views\\Test\\RazorTest.cshtml",
@@ -154,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TestController.cs",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\Controllers\\TestController.cs",
               "RelativeDocumentMoniker": "Controllers\\TestController.cs",
@@ -167,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
@@ -179,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "AOWebApp.csproj",
               "DocumentMoniker": "C:\\Users\\weeiw\\Documents\\inft-2064\\Week 1\\AOWebApp\\AOWebApp.csproj",
               "RelativeDocumentMoniker": "AOWebApp.csproj",
