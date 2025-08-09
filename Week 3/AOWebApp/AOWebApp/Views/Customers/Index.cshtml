@@ -1,0 +1,72 @@
+﻿@model AOWebApp.ViewModels.CustomerIndexViewModel
+
+<h1>Customers</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+<form asp-action="Index" method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <label asp-for="SearchText" class="form-label">Customer name</label>
+        <input asp-for="SearchText" class="form-control" list="nameSuggestions" autocomplete="off" />
+        <datalist id="nameSuggestions">
+            @foreach (var n in Model.NameSuggestions)
+            {
+                <option value="@n"></option>
+            }
+        </datalist>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="Suburb" class="form-label">Suburb</label>
+        <select asp-for="Suburb" asp-items="Model.SuburbList" class="form-select">
+            <option value="">All suburbs</option>
+        </select>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary me-2">Search</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
+    </div>
+</form>
+
+@if (!Model.Customers.Any())
+{
+    <div class="alert alert-info">No records to display.</div>
+}
+else
+{
+    <p>Matching records returned: @Model.Customers.Count</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Address</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.Customers)
+            {
+                <tr>
+                    <td>@c.FirstName</td>
+                    <td>@c.LastName</td>
+                    <td>@c.Email</td>
+                    <td>@c.ContactNumber</td>
+                    <td>@c.AddressId</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@c.CustomerId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@c.CustomerId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@c.CustomerId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
