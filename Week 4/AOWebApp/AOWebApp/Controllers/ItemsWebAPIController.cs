@@ -34,7 +34,7 @@ namespace AOWebApp.Controllers
 
             if (CategoryID.HasValue)
             {
-                query.Where(i => i.Category.ParentCategoryId == CategoryID);
+                query = query.Where(i => i.Category.ParentCategoryId == CategoryID);
             }
 
             return await query.ToListAsync();
