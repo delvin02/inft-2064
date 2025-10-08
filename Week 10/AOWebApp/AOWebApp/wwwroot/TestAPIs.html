@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h3>Category List</h3>
+    <ul id="CategoryListUL">
+    </ul>
+
+    <h3>Item List</h3>
+    <ul id="ItemListUL">
+
+    </ul>
+
+    <script>
+
+        fetch('/api/ParentCategoriesWebAPI').then((response) => response.json()).then(data => {
+            let ul = document.querySelector("#CategoryListUL");
+
+            data.forEach(c => {
+                let li = document.createElement("li");
+                li.innerText = c.categoryName;
+                ul.appendChild(li);
+            })
+        })
+
+        fetch('/api/ItemsWebAPI').then((response) => response.json()).then(data => {
+            let ul = document.querySelector("#ItemListUL");
+
+            data.forEach(c => {
+                let li = document.createElement("li");
+                li.innerText = c.itemName;
+                ul.appendChild(li);
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿@model SelectList
+@{
+    ViewData["Title"] = "AnnualSalesReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-light py-2 mb-2">
+    <h2 class="text-center"> Annual Sales Report</h2>
+</div>
+
+<div class="row mb-3">
+    <div class="col-2">
+        <select name="year" asp-items="@Model" class="form-control">
+            <option value="">Select...</option>
+        </select>
+    </div>
+</div>
