@@ -1,0 +1,152 @@
+﻿@model SelectList
+@{
+    ViewData["Title"] = "AnnualSalesReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-light py-2 mb-2">
+    <h2 class="text-center"> Annual Sales Report</h2>
+</div>
+
+<div class="row mb-3">
+    <div class="col-2">
+        <select name="year" asp-items="@Model" class="form-control">
+            <option value="">Select...</option>
+        </select>
+    </div>
+</div>
+
+<div>
+    <svg width="100%" height="600px" class="border border-primary rounded p-2"></svg>
+</div>
+
+@section scripts {
+    <script type="module">
+        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+        // NOTE:
+        // I think the practical is slightly too complicated and less strutured, i have re-factored to make sure
+        // i can understand and follow at a glance.
+
+        // basic setup - seelect svg
+        const svg = d3.select('svg');
+
+        // measure size
+        let fullWidth = svg.node().getBoundingClientRect().width;
+        let fullHeight = svg.node().getBoundingClientRect().height;
+
+        // 12 Create space for the axes
+        const chartMargins = {
+            left: 40,
+            right: 25,
+            top: 25,
+            bottom: 80
+        };
+
+        const chartWidth = fullWidth - (chartMargins.left + chartMargins.right);
+        const chartHeight = fullHeight - (chartMargins.top + chartMargins.bottom);
+
+
+        // event listener
+
+        document.querySelector('.row .col-2 [name="year"]').addEventListener('change', (event) => {
+            let year = event.target.value;
+            console.log("Year: "+ year);
+
+            // fetch data, and build chart
+            if (year.length > 0) {
+                fetch(`/Reports/AnnualSalesReportData?year=${year}`).then(response =>{
+                    console.log("response status " + response.status);
+                    console.log("response text " + response.statusText)
+                    return response.json();
+                }).then(data => buildGraph(data)).catch(err => console.log(err.message));
+            }
+        })
+
+        d3.select('.row .col-2 [name="year"]').on('change', (event) => {
+            console.log(event.target.value);
+        })
+
+        // clear previous chart elements
+        function clearPreviousChart() {
+          svg.selectAll('.chartGroup').remove();  
+          svg.selectAll('.axis').remove();       
+        }
+
+        function buildGraph(dataset) {
+            clearPreviousChart();
+
+            //  create chart group
+            const chartGroup = svg.append('g')
+                .attr('class', 'chartGroup')
+                .attr('transform', `translate(${chartMargins.left}, ${chartMargins.top})`);
+
+            // scales
+            const totalItemsRange = d3.extent(dataset, d => d.totalItems);
+            const maxTotalItems = totalItemsRange[1];
+
+            // Y-Scale -  maps totalItems value to pixel height (reversed for SVG coordinates)
+            const yScale = d3.scaleLinear()
+                .domain([0, maxTotalItems])
+                .range([chartHeight, 0]); 
+
+            // x-scale - maps month names to horizontal bands
+            const monthArray = dataset.map(d => d.monthName);
+            const xScale = d3.scaleBand()
+                .domain(monthArray)
+                .range([0, chartWidth]) 
+                .paddingInner(0.1);
+
+            // axes
+            // Y-Axis
+            const yAxis = d3.axisLeft(yScale);
+            chartGroup.append('g') // Use a new group for the axis for cleaner separation
+                .attr('class', 'axis y')
+                .call(yAxis);
+
+            // X-Axis
+            const xAxis = d3.axisBottom(xScale);
+            chartGroup.append('g')
+                .attr('class', 'axis x')
+                .attr('transform', `translate(0, ${chartHeight})`)
+                .call(xAxis);
+
+            // apply text rotation to X-Axis labels
+            chartGroup.selectAll('.axis.x text')
+                .attr('transform', 'rotate(-70)')
+                .attr('dx', '-0.8em')
+                .attr('dy', '0.25em')
+                .style('text-anchor', 'end')
+                .style('font-size', '0.9em');
+
+            // data join and bars
+            const barGroups = chartGroup.selectAll('.bar-group')
+                .data(dataset, d => d.monthName)
+                .enter()
+                .append('g')
+                .attr('class', 'bar-group')
+                .attr('transform', d => `translate(${xScale(d.monthName)}, 0)`);
+
+            // append height, width and animate the Rectangles (Bars)
+            barGroups.append('rect')
+                .attr('x', 0)
+                .attr('width', xScale.bandwidth())
+                .attr('y', chartHeight) // Start at the bottom of the chart area (chartHeight)
+                .attr('height', 0)      // Start with zero height
+                .style('fill', (d, i) => `rgb(20, 20, ${i * 15 + 80})`)
+                .transition()
+                .duration(800)
+                .attr('y', d => yScale(d.totalItems))
+                .attr('height', d => chartHeight - yScale(d.totalItems));
+
+            // append labels
+            barGroups.append('text')
+                .attr('x', xScale.bandwidth() / 2)
+                .attr('y', d => yScale(d.totalItems) - 6)
+                .attr('text-anchor', 'middle')
+                .attr('fill', 'black') 
+                .style('font-size', '0.9em')
+                .text(d => d.totalItems.toLocaleString());
+        }
+    </script>
+}
