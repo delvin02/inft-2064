@@ -1,0 +1,83 @@
+﻿@model AOWebApp.ViewModels.ItemSearchViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Items" asp-action="Index" method="post" class="mb-3">
+    <input type="text"
+           class="form-control"
+           maxlength="100"
+           name="searchText"
+           placeholder="Enter item name..."
+           title="Search for an item by name"
+           asp-for="searchText"/>
+
+    <select asp-for="CategoryId" class="form-control" asp-items="Model.CategoryList">
+        <option value="">All Categories...</option>
+    </select>
+    <select name="sortOrder" class="form-control">
+        <option value="" selected>Item Name [asc]</option>
+        <option value="name_desc" selected>Item Name [desc]</option>
+        <option value="price_asc" selected>Item Price [asc]</option>
+        <option value="price_desc" selected>Item Price [desc]</option>
+
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+
+<div class="row">
+    @foreach (var itemWithReview in Model.ItemList)
+    {
+        var item = itemWithReview.Item;
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img src="@item.ItemImage" class="card-img-top" alt="Image of @item.ItemName">
+                <div class="card-body">
+                    <h5 class="card-title"> @item.ItemName</h5>
+                    <p class="card-text">@Html.DisplayFor(m => item.ItemDescription)</p>
+                    <p>Cateogry: @Html.DisplayFor(modelItem => item.Category.CategoryId) </p>
+                    <p>Cost: @Html.DisplayFor(modelItem => item.ItemCost)</p>
+                    <p>
+                        Rating: 
+                        @if (itemWithReview.ReviewCount > 0)
+                        {
+                        <span>@itemWithReview.AverageRating.ToString("0.0") ★ from @itemWithReview.ReviewCount reviews</span>
+                        }
+                        else
+                        {
+                        <em>No customer ratings</em>
+                        }
+                    </p>
+                    <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+
+       @* @Html.DisplayFor(modelItem => item.ItemCost)
+        @Html.DisplayFor(modelItem => item.ItemImage)
+        @Html.DisplayFor(modelItem => item.Category.CategoryId) *@
+    }
+
+    @{
+        var PrevDisabled = !Model.ItemList.HasPreviousPage ? "disabled": "";
+        var NextDisabled = !Model.ItemList.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewBag.SortOrder" asp-route-CategoryId="@Model.CategoryId" asp-route-searchText="@Model.searchText" asp-route-PageNumber="@(Model.ItemList.PageIndex - 1)" class="btn btn-outline-primary @PrevDisabled">
+        Previous
+    </a>
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewBag.SortOrder" asp-route-CategoryId="@Model.CategoryId" asp-route-searchText="@Model.searchText" asp-route-PageNumber="@(Model.ItemList.PageIndex + 1)" class="btn btn-outline-primary @NextDisabled">
+        Next
+    </a>
+
+</div>
+
